@@ -1,0 +1,554 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Jonathan Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="icon" type="image/png" href="images/icondb.png" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="logo">
+							<img src="images/foto.png" class="custom-icon">
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h2>PORTFOLIO DE JONATHAN</h2>
+								<p>Analista de datos. Manejo Excel y SQL</p>
+								<p>Dashboards en Power BI</p>
+								<p><a href="https://github.com/jdmavod?tab=projects">Perfil de GitHub</a></p>
+							</div>
+						</div>
+						<nav>
+							<ul>
+								<li><a href="#intro">SOBRE MI</a></li>
+								<li><a href="#work">SQL</a></li>
+								<!-- <li><a href="#elements">ELEMENTS.</a></li> -->
+								<li><a href="#about">POWER BI</a></li>
+								<li><a href="#contact">CONTACTO</a></li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Intro -->
+							<article id="intro" style="text-align: justify;">
+								<h2 class="major">SOBRE MI</h2>
+								<span class="image main"><img src="images/me.png" alt="" /></span>
+								<p>Hola, mi nombre es Jonathan Mavo, obtuve mi titulo en Ingenieria de Sistemas y he estado laborando como IT Support desde el 2020. Siempre me he mantenido 
+									enfocado la resolucion de problemas tanto a nivel de software como hardware y siempre me he sentido muy a gusto con la tecnologia, con ganas constantes de aprender y de siempre 
+									desarrollar mis conocimientos hasta niveles optimos para aplicarlos en mi dia a dia.</p>
+									
+								<p>En los ultimos 2 años se ha observado un gran desarrollo en el sector de la inteligencia artificial y podemos ver que el internet esta inundado con una IA para cada actividad,
+									lo que nos permite a todos mejorar en el dia a dia abriendo puertas a todas las personas. Esto nos ha permitido a todos aprender desde lo mas basico de algo que no conocemos
+									hasta indagar en lo mas profundo de nuestros conocimientos. Mucha gente en la actualidad piensa que la IA nos quitara el trabajo, nuestros puestos, nuestra vida diaria para ser
+									resuelta en un prompt y la verdad es que nunca se podra reemplazar nuestra humanidad.</p>
+								
+								<p>Para mi este 2025 representa un año de avance, un camino de desarrollo para mis conocomientos y mi carrera, me siento entusiasmado y estoy enfocado en lograr 
+									conseguir un lugar que me permita ser de ayuda. Actualmente estoy concentrado en aplicar mis habilidades en el campo de analisis de datos. Afortunadamente
+									durante mis años de laburo como IT Support me ha permitido resolver problemas buscando la fuente, pensando en un plan de accion e implementarlo para obtener
+									resultados efectivos, siento que todo esto de verdad me ayudara en este camino del Analisis de Datos.</p> 
+								
+								<p>La decision de elegir esta carrera me llevo a realizar <strong><a href="#work">mi primer proyecto</a></strong> sobre Limpieza de datos y Analisis exploratorio de datos
+									en donde trabaje con un dataset sobre los despidos alrededor del mundo debido al COVID-19 estandarizando distintas columnas para luego tomar nota de algunos insight tomando 
+									en cuenta los resultados obtenidos de una tabla ya limpia mediante consultas realizadas utilizando distintos queries y subqueries.</p>
+							</article>
+
+						<!-- Work -->
+							<article id="work" style="text-align: justify;">
+								<h3 class="major">Despidos mundiales entre los años 2020-2023</h3>
+								<span class="image main"><img src="images/sqlproject.jpg" alt="" /><em class="caption">Despidos internacionales en el mundo</em></span>
+															
+								<p>Usando este dataset como primer proyecto elegi indagar en varias metricas de despidos alrededor del mundo a partir del año 2020 hasta principios del 2023. En este 
+									sentido estableci algunos objetivos referentes a la limpieza de los datos y distintas preguntas para responder en un futuro analisis exploratorio. El objetivo de este
+									proyecto es limpiar los datos y realizar un analisis de datos exploratorio al final con los resultados limpios y estandarizados.
+<pre><code>### Confirmar la importacion correcta del dataset ###
+SELECT * FROM layoffs;
+</code></pre>
+								
+								<p>Tomando en cuenta estos objetivos empece entonces a indagar en este proyecto. El objetivo inicial se trataba de buscar, verificar y eliminar duplicados, hice esto mediante un 
+									duplicado de la tabla original ya que en muchas situaciones del dia a dia, nuestra tabla origen siempre se encuentra operativa y en uso por distintos usuarios en una
+									empresa, luego de crear este duplicado se empezaron a realizar distintas verificaciones. Ejemplo fue usar un CTE donde se asigna un ROW_NUMBER a cada fila para posteriormente, 
+									si encontraba un duplicado, verificar si ese duplicado en realidad posee alguna columna con datos distintos o si una columna verificada tenia al menos un dato igual.
+<pre><code>### Creando un CTE para duplicar la tabla ###
+WITH duplicate_cte AS (SELECT *, ROWNUMBER()
+OVER (PARTITION BY company, location, industry,
+total_laid_off, percentage_laid_off, `date`,
+stage, country, funds_raised_millions) AS row_num
+FROM layoffs_duplicate)
+
+SELECT * FROM duplicate_cte WHERE row_num > 1;
+</code></pre>
+								
+								<p>Siguiendo con el CTE encontre que la compañia llamada "Casper" mostraba resultados duplicados, al verificar me di cuenta de que obtuve 3 registros y tenia 2 que son duplicados
+									mostrando exactamente la misma informacion. Para seguir con la limpieza de datos decidi dejar esta tabla duplicada y crear una tercera tabla que me permitia agregar cualquier
+									columna que necesitara y poder trabajar sin ningun limite de accion sobre estos datos.</p>
+
+								<p>Basandome en este resutaldo decidi entonces crear una tercera tabla con los mismos datos agregando la columna "row_number" para realizar un DELETE leyendo los 
+									distintos campos y comparandolos entre ellos y asi completar el primer objetivo de este proyecto. Luego de cumplir con la limpieza de los duplicados se pudo estandarizar todos
+									los datos dentro de este tercer duplicado para mantener un orden en como se presentan los resultados ya sea con toda la columna utilizando un mismo formato, una misma 
+									abrevacion o eliminando caracateres sobrantes e innecesarios.</p>
+
+<pre><code> ### Consultar una columna ###
+SELECT `date` FROM layoffs_duplicate2;
+
+### Cambiar el tipo e dato de TEXTO a FECHA ###
+SELECT `date`, STR_TO_DATE(`date`, %m,%d,%Y)
+FROM layoffs_duplicate2;
+
+### Actualizar la columna con el formato ###
+UPDATE layoffs_duplicate2 SET date = STR_TO_DATE
+(`date`, '%m,%d,%Y');
+</code></pre>
+
+								<p>Para cumplir con este objetivo se realizaron varias consultas en distintas columnas de la tabla observando todos esas pequeñas diferencias de caracteres, espacios, signos de
+									puntacion y demas. Como se observa en la imagen anterior se realizaron algunos TRIM en distintas columnas, una de estas fue en la columna "country" donde se mostraba que
+									el país "United States" devolvía como resultado dos registros, uno indicando "United States" y otro "United States.", fueron todas esas pequeñas diferencias las que se fueron
+									optimizando en el camino. De igual manera note que la columna FECHA era del tipo STRING, al momento de trabajar con esta columna seria mas util manejarla como columna de tipo 
+									'date' por lo que se cambio con un STR_TO_DATE.</p>
+								
+								<p>Segui entonces con el tercer objetivo de arreglar los espacios vacíos y nulos dentro del dataset, para realizar esto de la manera mas óptima posible
+									en primer lugar se realizó un SELF JOIN para verificar cuales espacios estaban vacíos o nulos y como se podía proceder para actualizarlos, se decidió entonces luego de obtener 
+									los resutlados que se realizaria un UPDATE junto a un JOIN tomando en cuenta el campo "company" que le ponía como condición actualizarlos en campos vacíos y nulos. Antes de 
+									realizar esto me di cuenta que primero debia indicar que los campos vacíos debian ser iguales a nulos para que el UPDATE no tuviera problemas eligiendo entre las dos condiciones 
+									que eran vacios y nulos y solo eligiera campos nulos para mayor comodidad.
+<pre><code>### JOIN para tratar nulos y vacios ###
+UPDATE layoffs_duplicate2 AS t1
+JOIN layoffs_duplicate2 AS t2
+ON t1.company = t2.company
+SET t1.industry = t2.industry
+WHERE t1.industry IS null
+AND t2.industry IS NOT NULL;
+</code></pre>
+								
+								<p>En este punto los tres primeros objetivos de este proyecto ya se habian logrado asi que habia llegado el momento de los toques finales, eliminar columnas innecesarias para el 
+									Analisis Exploratorio que se realizaria mas adelante y verificar que todo estuviera correcto en el dataset. Para este objetivo final decidi eliminar las columnas "total_laid_off" 
+									"percentage_laid_off" y una de las primeras columnas creadas en este proyecto la cual fue "row_number", las razones de eliminar cada una de estas columnas fueron las siguientes:</p>
+
+								<p><strong>total_laid_off y percentage_laid_off:</strong> Si por alguna razón este dataset se utilizaba para crear un dashboard, la cantidad de datos nulos en ambas columnas no seria
+									una fuente confiable de datos ya que la cantidad estas dos columnas eran muy grande, lo que se consideraría como datos redundantes sin ningun uso o funcion a cumplir a futuro.</p>
+								
+								<p><strong>row_number:</strong> Esta columna fue creada al inicio de este proyecto con la única intención de cumplir con algunos queries, por ende, se consideraba innecesaria para
+									cualquier uso futuro.</p>
+								
+								<p>La fase de limpieza y preparación del dataset de despidos ha concluido satisfactoriamente, cumpliendo todos los objetivos clave establecidos. Se abordaron y eliminaron duplicados,
+									se estandarizaron formatos en columnas cruciales como fechas y países y se gestionaron inteligentemente los valores nulos y vacíos para asegurar la consistencia. Tras eliminar 
+									columnas redundantes e innecesarias, el dataset está ahora óptimo y listo para la fase de Análisis Exploratorio de Datos (EDA). Este riguroso proceso ejemplifica perfectamente el
+									esencial trabajo diario que realiza un analista de datos para transformar datos crudos en información fiable y lista para generar valor.</p>
+
+								<h3 class="major">Analisis de datos exploratorio</h3>
+								<span class="image main"><img src="images/sqlproject8.png" alt="" /><em class="caption">Exploratory Data Analysis</em></span>
+
+								<p>Al momento de finalizar la limpieza de datos empece a responder algunas dudas sobre toda esta información guardada en el dataset, estas preguntas iban desde saber cuales fueron
+									las empresas que despidieron a la totalidad de su plantilla o que porcentaje representaban los despidos en algunos casos y para esto seria mejor utilizar los resultados obtenidos
+									de las tablas usando los datos ya ordenados, limpios y estandarizados para desarrollar hipótesis o insights basadas en los mismos.</p>
+								
+								<p><span class="image main"><img src="images/sqlproject9.png" alt="" /><em class="caption">1.- Impacto general de los despidos</em></p>
+								<p><strong>Hallazgos:</strong>
+								<ul>
+									<li><strong> Máximo histórico de despidos: </strong>hubo casos extremos de empresas que despidieron al 100% de su personal, incluso algunas que habían recaudado millones
+										de dólares antes del colapso.</li>
+									<li><strong> Período crítico: </strong>los despidos se concentraron entre 2020 y 2023, coincidiendo con la pandemia de COVID-19 y sus secuelas económicas.</li>
+								</ul>
+								<blockquote>Durante la pandemia, algunas empresas cerraron por completo a pesar de haber recibido grandes inversiones. Esto sugiere que incluso negocios bien financiados no pudieron
+									resistir los efectos económicos del COVID-19.</blockquote></p>
+
+								<p><span class="image main"><img src="images/sqlproject10.png" alt="" /><em class="caption">2.- Industrias mas afectadas por el COVID</em></p>
+								<p><strong>Hallazgos:</strong>
+								<ul>
+									<li><strong> Industrias críticas: </strong>las más impactadas fueron las industrias de Consumo, Retail y Transporte.</li>
+									<li><strong> Empresas líderes en despidos: </strong>algunas compañías aparecen frecuentemente en el top anual, lo que indica problemas estructurales o sectores en crisis.</li>
+								</ul>
+								<blockquote>Sectores que dependen del contacto directo con las personas como tiendas físicas o transporte, fueron los más golpeados. Además, ciertas empresas tuvieron que
+									reducir personal varias veces en distintos años, lo que podría señalar dificultades prolongadas.</blockquote></p>
+
+								<p><span class="image main"><img src="images/sqlproject11.png" alt="" /><em class="caption">3.- Impacto Geográfico</em></p>
+								<p><strong>Hallazgos:</strong>
+								<ul>
+									<li><strong> Países mas afectados: </strong>Estados Unidos lidera en número total de despidos, seguido de países europeos como Alemania y Reino Unido.</li>
+									<li><strong> Etapa de la empresa: </strong>las empresas en etapa Post-IPO (ya cotizando en la bolsa de valores) tuvieron más despidos que startups en etapas tempranas.</li>
+								</ul>
+								<blockquote>Los despidos fueron más frecuentes en empresas establecidas y en países con economías grandes pero altamente competitivas, donde ajustar costos fue clave para sobrevivir.</blockquote></p>		
+
+								<p><span class="image main"><img src="images/sqlproject12.png" alt="" /><em class="caption">4.- Tendencias temporales</em></p>
+								<p><strong>Hallazgos:</strong>
+								<ul>
+									<li><strong> Pico de despidos: </strong>el mes con mayor número de despidos fue Marzo de 2020, seguido de olas menores en 2022 y 2023.</li>
+									<li><strong> Acumulación progresiva: </strong>la suma acumulada de despidos creció un 48% entre 2020 y 2023, mostrando un efecto prolongado de la pandemia.</li>
+								</ul>
+								<blockquote>El primer impacto fuerte fue al inicio del COVID-19 pero los despidos continuaron en los años siguientes, como si fuera una 'ola expansiva' de la crisis inicial.</blockquote></p>
+
+								<p><span class="image main"><img src="images/sqlproject13.png" alt="" /><em class="caption">5- Relación entre Financiamiento y Despidos</em></p>
+								<p><strong>Hallazgos:</strong>
+								<ul>
+									<li><strong> Paradoja de fondos recaudados:: </strong>algunas empresas que despidieron al 100% de su personal habían recaudado más de $500 millones</li>
+									<li><strong> Correlación no directa: </strong>no hay una relación clara entre el monto recaudado y la cantidad de despidos; empresas con menos fondos también sobrevivieron.</li>
+								</ul>
+								<blockquote>Inyectar dinero no siempre salva a una empresa. Algunas de estas que recibieron grandes inversiones terminaron cerrando, mientras que otras con menos recursos 
+									lograron adaptarse.</blockquote></p>
+
+								<p>Una vez finalizada la limpieza, se realizó un análisis exploratorio del dataset de despidos para responder preguntas clave. Los hallazgos revelaron un impacto inicial severo de 
+									la pandemia, afectando desproporcionadamente a las industrias de Consumo, Retail y Transporte, con EE.UU. liderando geográficamente. Curiosamente, empresas Post-IPO sufrieron más
+									despidos que startups y una alta financiación no garantizó la supervivencia, evidenciado por compañías bien financiadas que despidieron al 100% de su personal. El análisis
+									confirma un efecto prolongado de la crisis, mostrando un crecimiento acumulado de despidos en el periodo estudiado</p>
+								
+								<p>Este proyecto de SQL inicial finalizó con las conclusiones realizadas anteriormente, si deseas ver otro proyecto realizado por mi te recomiendo dirigirte al área de 
+									<strong><a href="#about">Power BI</a></strong>, donde explico los hallazgos claves encontrados en un dashboard básico basandome en una encuesta realizada a personas que
+									respondieron durante todo el año 2024, en la misma se les hizo preguntas sobre país de origen, puesto actual de trabajo, salario actual y niveles de satisfaccion
+									con su sueldo y relación vida/trabajo.</p>
+							</article>
+
+						<!-- About -->
+							<article id="about" style="text-align: justify;">
+								<h3 class="major">Encuesta sobre profesionales en el campo de datos</h3>
+								<span class="image main"><img src="images/main.png" alt="" /></span>
+
+								<p>En este dashboard se resumen los hallazgos clave de una encuesta realizada a 630 profesionales de datos con el objetivo de comprender mejor su satisfaccion con los salarios,
+									preferencias de lenguajes de programación, percepción de la dificultad para ingresar al campo, y niveles de satisfacción laboral. En este sentido se tomo nota de los siguientes
+									hallazgos:</p>
+								
+								<p><strong>1. Salario promedio por cargo laboral</strong>
+									<ul>
+										<li>El cargo de "Data Scientist" lidera con el salario promedio más alto seguido por "Data Engineer" y "Data Architect". </li><blockquote>Esta superioridad salarial de los 
+											Data Scientists subraya la intensa demanda en el mercado por profesionales con la capacidad de extraer insights valiosos y construir modelos predictivos a partir de datos
+											complejos. Su alta especialización que a menudo incluye un profundo conocimiento en estadística, machine learning y programación, justifica esta remuneración superior.</blockquote>
+										
+										<li>Cargos laborales como "Database Developer" y "Student/Looking for a job" presentan los salarios más bajos.</li><blockquote>Esta diferencia salarial refleja la naturaleza
+											más operativa y en el caso de los estudiantes, la falta de experiencia laboral consolidada. Los Database Developers, si bien cruciales para la gestión y organización de
+											datos, suelen tener una curva de especialización percibida como menos pronunciada en comparación con los roles de ciencia de datos.</blockquote></p>
+									</ul>
+								
+								<p><strong>2. Países de los Encuestados:</strong>
+									<ul>
+										<li>La mayoría de los encuestados residen en Estados Unidos, lo que podría influir en los resultados debido a sesgos culturales y del mercado laboral.</li><blockquote>La 
+											predominancia de encuestados estadounidenses implica que los salarios promedio observados reflejan principalmente las condiciones del mercado laboral de EE.UU. y podrían
+											no ser representativos de las tendencias salariales a nivel global. Al generalizar las conclusiones sobre el liderazgo salarial de los Data Scientists y la brecha con
+											otros roles es crucial tener en cuenta este sesgo. Por ejemplo, en otros países con un menor costo de vida o una demanda diferente de profesionales de datos, las 
+											diferencias salariales entre los roles podrían ser menos pronunciadas o incluso presentar un orden distinto.</blockquote></p>
+									</ul>									
+								
+								<p><strong>3. Lenguajes de Programación Favoritos:</strong>
+									<ul>
+										<li>Python es el lenguaje dominante, lo que resalta su importancia en la ciencia de datos.</li><blockquote>La clara preferencia por Python como lenguaje dominante confirma 
+											su rol como herramienta esencial en el análisis de datos, especialmente en el contexto del mercado laboral estadounidense, donde reside la mayoría de los encuestados y
+											donde los Data Scientists lideran en salario. Esta fuerte adopción de Python refuerza la idea de que las habilidades en este lenguaje son altamente valoradas y 
+											probablemente un factor contribuyente a la alta demanda y remuneración de los roles de Data Scientist y Data Engineer.</blockquote>
+										<li>Otros lenguajes como R, C/C++, JavaScript y Java tienen una presencia menor.</li><blockquote>Dependiendo del rol específico y del mercado laboral en otros países, una 
+											comprensión básica o incluso especializada en estos otros lenguajes podría seguir siendo valiosa y ofrecer ventajas competitivas.</blockquote></p>
+									</ul>									
+
+								<p><strong>4.Datos Demográficos:</strong>
+									<ul>
+										<li>La edad promedio de los encuestados es de 30 años.</li>
+										<li>La cantidad de personas encuestadas es de 630.</li>
+										<li>La satisfacción con el equilibrio trabajo/vida es moderada (5.74/10).</li>
+										<li>La satisfacción con el salario es relativamente baja (4.27/10), lo que sugiere posibles problemas de retención.</li>
+										<li>La percepción de dificultad es variada, con una proporción significativa de encuestados que la consideran "Ni fácil ni difícil" o "Difícil".</li>
+									</ul>
+									<blockquote><p>La baja satisfacción salarial contrastada con una satisfacción moderada con el equilibrio trabajo/vida sugiere que, a pesar de un equilibrio trabajo-vida aceptable 
+										para muchos, la compensación económica no está a la altura de las expectativas. Esto, en el contexto de la alta demanda y los salarios líderes de roles como Data Scientist,
+										podría indicar que incluso en roles bien remunerados la satisfacción salarial general no es alta o que la insatisfacción se concentra en roles de menor remuneración. Esta 
+										situación plantea serios riesgos de retención de talento en todos los niveles, ya que la percepción de una compensación inadecuada puede impulsar a los profesionales a buscar
+										mejores oportunidades.</p>
+
+										<p>Además, la variada percepción de dificultad para desempeñar los roles con una proporción significativa considerándolo "Ni fácil ni difícil" o "Difícil", resalta la 
+											necesidad de mejorar el acceso al campo a través de programas de formación más efectivos y la implementación de mentorías. Esto es crucial para cerrar la brecha entre la
+											alta demanda de profesionales de datos y la oferta actual, especialmente considerando que la mayoría de los encuestados se encuentran en una etapa relativamente temprana
+											de su carrera donde el desarrollo profesional y el apoyo son fundamentales.</blockquote></p>
+								
+								<p>Para finalizar la presentación de los hallazgos en este proyecto, es crucial destacar que si bien el panorama salarial muestra una clara valoración del rol del Data Scientist, 
+									impulsada por la demanda y la especialización, existen señales importantes que debemos atender. La satisfacción salarial general relativamente baja a pesar de un equilibrio 
+									trabajo-vida moderado, nos advierte sobre posibles desafíos en la retención de talento incluso en roles de alta remuneración. Además, la percepción de dificultad para ingresar y
+									desempeñarse en el campo subraya la necesidad de fortalecer los programas de formación y mentoría para ampliar la base de profesionales cualificados. Finalmente, la fuerte 
+									influencia del mercado laboral estadounidense en nuestros resultados nos recuerda la importancia de considerar el contexto geográfico al interpretar estas tendencias.</p>
+									
+								<p>En resumen, para seguir siendo competitivos y asegurar un crecimiento sostenible en el ámbito de los datos, debemos enfocarnos en estrategias integrales que aborden tanto la 
+									compensación como el desarrollo profesional y el acceso al campo, teniendo en cuenta las particularidades de los diferentes mercados donde operamos o planeamos operar.</p>
+							</article>
+
+						<!-- Contact -->
+							<article id="contact">
+								<h2 class="major">Redes y contactos</h2><em><a href = https://forms.gle/uDNd6usKzYQhvf9L7>Rellena este Google Form para contactarme por favor. 📄</a></em>
+								
+									<p></p>
+									<p> Aca encontraras mis redes sociales y perfiles para mas información.</p>
+									<ul class="icons">
+										<li><a href="https://www.instagram.com/jdmavod/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="https://www.linkedin.com/in/jdmavod/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+										<li><a href="https://github.com/jdmavod" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+									</ul>								
+							</article>
+
+						<!-- Elements -->
+							<article id="elements">
+								<h2 class="major">Elements</h2>
+
+								<section>
+									<h3 class="major">Text</h3>
+									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
+									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
+									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
+									<hr />
+									<h2>Heading Level 2</h2>
+									<h3>Heading Level 3</h3>
+									<h4>Heading Level 4</h4>
+									<h5>Heading Level 5</h5>
+									<h6>Heading Level 6</h6>
+									<hr />
+									<h4>Blockquote</h4>
+									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
+									<h4>Preformatted</h4>
+									<pre><code>i = 0;
+
+while (!deck.isInOrder()) {
+    print 'Iteration ' + i;
+    deck.shuffle();
+    i++;
+}
+
+print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
+								</section>
+
+								<section>
+									<h3 class="major">Lists</h3>
+
+									<h4>Unordered</h4>
+									<ul>
+										<li>Dolor pulvinar etiam.</li>
+										<li>Sagittis adipiscing.</li>
+										<li>Felis enim feugiat.</li>
+									</ul>
+
+									<h4>Alternate</h4>
+									<ul class="alt">
+										<li>Dolor pulvinar etiam.</li>
+										<li>Sagittis adipiscing.</li>
+										<li>Felis enim feugiat.</li>
+									</ul>
+
+									<h4>Ordered</h4>
+									<ol>
+										<li>Dolor pulvinar etiam.</li>
+										<li>Etiam vel felis viverra.</li>
+										<li>Felis enim feugiat.</li>
+										<li>Dolor pulvinar etiam.</li>
+										<li>Etiam vel felis lorem.</li>
+										<li>Felis enim et feugiat.</li>
+									</ol>
+									<h4>Icons</h4>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+									</ul>
+
+									<h4>Actions</h4>
+									<ul class="actions">
+										<li><a href="#" class="button primary">Default</a></li>
+										<li><a href="#" class="button">Default</a></li>
+									</ul>
+									<ul class="actions stacked">
+										<li><a href="#" class="button primary">Default</a></li>
+										<li><a href="#" class="button">Default</a></li>
+									</ul>
+								</section>
+
+								<section>
+									<h3 class="major">Table</h3>
+									<h4>Default</h4>
+									<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Item One</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Two</td>
+													<td>Vis ac commodo adipiscing arcu aliquet.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Three</td>
+													<td> Morbi faucibus arcu accumsan lorem.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Four</td>
+													<td>Vitae integer tempus condimentum.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Five</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="2"></td>
+													<td>100.00</td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+
+									<h4>Alternate</h4>
+									<div class="table-wrapper">
+										<table class="alt">
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Item One</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Two</td>
+													<td>Vis ac commodo adipiscing arcu aliquet.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Three</td>
+													<td> Morbi faucibus arcu accumsan lorem.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Four</td>
+													<td>Vitae integer tempus condimentum.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Five</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="2"></td>
+													<td>100.00</td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+								</section>
+
+								<section>
+									<h3 class="major">Buttons</h3>
+									<ul class="actions">
+										<li><a href="#" class="button primary">Primary</a></li>
+										<li><a href="#" class="button">Default</a></li>
+									</ul>
+									<ul class="actions">
+										<li><a href="#" class="button">Default</a></li>
+										<li><a href="#" class="button small">Small</a></li>
+									</ul>
+									<ul class="actions">
+										<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
+										<li><a href="#" class="button icon solid fa-download">Icon</a></li>
+									</ul>
+									<ul class="actions">
+										<li><span class="button primary disabled">Disabled</span></li>
+										<li><span class="button disabled">Disabled</span></li>
+									</ul>
+								</section>
+
+								<section>
+									<h3 class="major">Form</h3>
+									<form method="post" action="#">
+										<div class="fields">
+											<div class="field half">
+												<label for="demo-name">Name</label>
+												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
+											</div>
+											<div class="field half">
+												<label for="demo-email">Email</label>
+												<input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
+											</div>
+											<div class="field">
+												<label for="demo-category">Category</label>
+												<select name="demo-category" id="demo-category">
+													<option value="">-</option>
+													<option value="1">Manufacturing</option>
+													<option value="1">Shipping</option>
+													<option value="1">Administration</option>
+													<option value="1">Human Resources</option>
+												</select>
+											</div>
+											<div class="field half">
+												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
+												<label for="demo-priority-low">Low</label>
+											</div>
+											<div class="field half">
+												<input type="radio" id="demo-priority-high" name="demo-priority">
+												<label for="demo-priority-high">High</label>
+											</div>
+											<div class="field half">
+												<input type="checkbox" id="demo-copy" name="demo-copy">
+												<label for="demo-copy">Email me a copy</label>
+											</div>
+											<div class="field half">
+												<input type="checkbox" id="demo-human" name="demo-human" checked>
+												<label for="demo-human">Not a robot</label>
+											</div>
+											<div class="field">
+												<label for="demo-message">Message</label>
+												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+											</div>
+										</div>
+										<ul class="actions">
+											<li><input type="submit" value="Send Message" class="primary" /></li>
+											<li><input type="reset" value="Reset" /></li>
+										</ul>
+									</form>
+								</section>
+
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; Creacion y diseño: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
