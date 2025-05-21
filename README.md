@@ -100,6 +100,34 @@ This exploratory analysis highlighted significant trends and characteristics wit
 ## Dashboard in Power BI <a id="powerbi"></a>
 ![First-ETL-EDA-Project](https://github.com/jdmavod/First-ETL-EDA-Project/blob/main/images/bi-dashboard.png)
 
+This report highlights key insights from a survey conducted among 630 data professionals. The objective was to gain a deeper understanding of crucial aspects such as salary satisfaction, preferred programming languages, the perceived difficulty of entering and working in the data field, and overall job contentment. The following points detail the principal findings from this research.
+
+<details>
+	<summary>I. Average Salary by Job Role</summary>
+	Data Scientists command the highest average salaries, closely followed by Data Engineers and Data Architects. This reflects the significant market demand for professionals skilled in extracting valuable insights and developing predictive models from complex datasets. Their advanced specialization, often encompassing deep knowledge of statistics, machine learning, and programming, typically justifies this higher compensation.<br><br>
+	Conversely, roles such as Database Developer and positions held by students or those actively seeking employment show the lowest average salaries. This difference often mirrors the more operational nature of some roles or, in the case of students, a lack of consolidated work experience. While Database Developers are vital for data management, their specialization curve is often perceived as less steep compared to data science-focused roles.
+</details>
+<details>
+	<summary>II. Geographic Distribution of Respondents</summary>
+	The majority of the 630 survey participants reside in the United States. This demographic concentration is important because it suggests that the observed findings, particularly regarding salary benchmarks and job role hierarchies, are heavily influenced by US labor market conditions and cultural factors, and may not be directly generalizable to a global scale.<br><br>
+
+Therefore, when interpreting conclusions, such as the salary leadership of Data Scientists, it's crucial to acknowledge this potential US-centric bias. In other countries with different costs of living or varying demand for data professionals, salary differences between roles might be less pronounced, or the ranking of roles by compensation could differ.
+</details>
+<details>
+	<summary>III. Preferred Programming Languages</summary>
+	Python stands out as the dominant programming language among the surveyed data professionals. This strong preference underscores Python's critical role as an essential tool in data analysis and data science, aligning with the high demand and compensation for Data Scientists and Data Engineers, particularly within the US market where most respondents are based.<br><br>
+
+While other languages such as R, C/C++, JavaScript, and Java have a smaller footprint in the survey responses, a foundational or even specialized understanding of these languages can still offer competitive advantages. Their relevance may vary depending on the specific job role, industry, or the labor market conditions in different geographical regions.
+</details>
+<details>
+	<summary>IV. Demographic Profile and Satisfaction Insights</summary>
+	The average age of respondents is 30 years. Notably, while work-life balance satisfaction is moderate (5.74 out of 10), overall salary satisfaction is relatively low (4.27 out of 10). This discrepancy, even with roles like Data Scientists being well-compensated, suggests that compensation may not be meeting expectations across the board or that dissatisfaction is concentrated in lower-paying roles, posing potential talent retention challenges.<br><br>
+
+Furthermore, the perceived difficulty of entering the data field or performing effectively within it varies, with a significant number of professionals finding it "Neither easy nor difficult" or "Difficult." This highlights a potential need for more effective training programs and mentorship opportunities. Addressing this could help bridge the gap between the high demand for data professionals and the current supply, especially for those in the earlier stages of their careers who form a large part of the respondent base.
+</details>
+
+In summary, while the data field highly values specialized roles like Data Scientists, the survey uncovers important considerations regarding overall salary satisfaction and the challenges of navigating a career in this domain. These findings emphasize the need for focused strategies on compensation, robust professional development, and accessible career pathways to ensure a thriving and sustainable talent pool.
+
 ## Contribution <a id="contribution"></a>
 This project was my first in the field of data analysis. The work reflected here was my first personal project, where I learned a lot about the basics of SQL and Power BI. If you think anything you see here might help you, feel free to fork it for your own use.
 
