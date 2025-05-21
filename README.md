@@ -23,7 +23,7 @@ The main objective of this guided project was to learn the basics of SQL, from S
 ## Working with MySQL <a id="mysql"></a>
 ![First-ETL-EDA-Project](https://github.com/jdmavod/First-ETL-EDA-Project/blob/main/images/sql-work.png)
 
-Here I meticulously clean and prepare a dataset of global layoffs spanning late 2019 to early 2023 for subsequent Exploratory Data Analysis. The primary goal was to transform raw data into a reliable, standardized, and analysis-ready format. This report outlines the critical stages involved in the data cleaning and preparation process.
+Here I meticulously clean and prepare a dataset of global layoffs spanning late 2019 to early 2023 for subsequent Exploratory Data Analysis. The primary goal was to transform raw data into a reliable, standardized, and analysis-ready format. This report outlines the critical stages involved in the data cleaning and preparation process.<br>
 
 <details>
   <summary>I. Initial Setup and Data Integrity</summary><br>
@@ -62,7 +62,40 @@ Here I meticulously clean and prepare a dataset of global layoffs spanning late 
 </details>
 
 ## Exploratory Data Analysis with clean data<a id="eda"></a>
-![First-ETL-EDA-Project](https://github.com/jdmavod/First-ETL-EDA-Project/blob/main/images/)
+![First-ETL-EDA-Project](https://github.com/jdmavod/First-ETL-EDA-Project/blob/main/images/eda-results.png)
+
+To uncover initial patterns, trends, and insights from the cleaned global layoffs dataset. This EDA aimed to answer key questions regarding the scope, nature, and contributing factors of workforce reductions during the period of late 2019 to early 2023.<br>
+
+<details>
+	<summary>I. Overall Impact of Layoffs</summary><br>
+	1.- Extreme Cases: A notable finding was the occurrence of companies laying off their entire workforce (100% of staff), including some that had previously secured significant funding.<br><br>
+	2.- Critical Period: Layoffs were predominantly concentrated between 2020 and 2023, coinciding with the COVID-19 pandemic and its subsequent economic repercussions.<br><br>
+	3.- Vulnerability Despite Funding: The data suggests that even well-funded businesses were not immune to the severe economic impact of the COVID-19 crisis, with some ceasing operations entirely.<br><br>
+</details>
+<details>
+	<summary>II. Most Affected Industries</summary><br>
+	1.- High-Impact Sectors: Consumer, Retail, and Transportation industries experienced the most substantial impact from layoffs. These sectors often rely on direct consumer interaction, which was heavily disrupted.<br><br>
+	2.- Recurring Layoffs: Certain companies appeared repeatedly in top layoff figures across different years, potentially indicating deeper structural issues within those businesses or persistent crises in their respective sectors.<br><br>
+</details>
+<details>
+	<summary>III. Geographic Impact</summary><br>
+	1.- Leading Countries: The United States registered the highest total number of layoffs. European nations, including Germany and the United Kingdom, also featured prominently.<br><br>
+	2.- Company Stage as a Factor: Post-IPO (publicly traded) companies accounted for a larger share of layoffs compared to early-stage startups. This suggests that larger, more established companies in competitive economies undertook significant cost-cutting measures.<br><br>
+</details>
+<details>
+	<summary>IV. Temporal Trends</summary><br>
+	1.- Initial Peak: The highest number of layoffs occurred in March 2020, at the onset of the COVID-19 pandemic.<br><br>
+	2.- Subsequent Waves: While the initial shock was significant, smaller waves of layoffs were observed in 2022 and 2023, indicating a prolonged "ripple effect" of the initial crisis.<br><br>
+	3.- Progressive Accumulation: The cumulative sum of layoffs demonstrated a substantial increase (48%) between 2020 and 2023, underscoring the sustained impact on the workforce.<br><br>
+</details>
+<details>
+	<summary>V. Relationship Between Funding and Layoffs</summary><br>
+	1.- Funding Paradox: A counterintuitive finding was that some companies laying off 100% of their staff had previously raised substantial capital (e.g., over $500 million).<br><br>
+	2.- No Direct Correlation: The analysis did not reveal a clear, direct correlation between the amount of funding a company had raised and the extent of its layoffs. Companies with less funding were also observed to have survived.<br><br>
+	3.- Insight: This suggests that capital injection alone is not a definitive safeguard against business failure or large-scale layoffs, and adaptability may play a more crucial role.<br><br>
+</details>
+
+This exploratory analysis highlighted significant trends and characteristics within the global layoffs dataset from late 2019 to early 2023. The findings provide a foundational understanding of the pandemic's impact on various industries, regions, and company types, and how factors like funding interacted with these events. These insights can serve as a basis for more in-depth investigation.
 
 ## Dashboard in Power BI <a id="powerbi"></a>
 ![First-ETL-EDA-Project](https://github.com/jdmavod/First-ETL-EDA-Project/blob/main/images/bi-dashboard.png)
