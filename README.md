@@ -1,7 +1,12 @@
-# ETL & EDA basic personal project
-My first data project, where I implemented basic skills to do Extract, Transform, Load (ETL) and also did a small Exploratory Data Analysis (EDA) on the cleaned data.
+# Global layoffs between 2020 and 2023
 
+![First-ETL-EDA-Project](https://github.com/jdmavod/First-ETL-EDA-Project/blob/main/images/sqlproject.jpg)
 
+A project that used a dataset that included information on mass layoffs across a wide variety of companies, from large to small. The dates covered in this project were those during which the world was affected by COVID-19, in order to show how this impacted industries.
+
+## Contents
+
+- [Database](#database)
 
 # HTML5 Template Rights
 /*
