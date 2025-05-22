@@ -64,7 +64,7 @@ Here I meticulously clean and prepare a dataset of global layoffs spanning late 
 ## Exploratory Data Analysis with clean data<a id="eda"></a>
 ![First-ETL-EDA-Project](https://github.com/jdmavod/First-ETL-EDA-Project/blob/main/images/eda-results.png)
 
-To uncover initial patterns, trends, and insights from the cleaned global layoffs dataset. This EDA aimed to answer key questions regarding the scope, nature, and contributing factors of workforce reductions during the period of late 2019 to early 2023.<br>
+To uncover initial patterns, trends, and insights from the cleaned global layoffs dataset I proceeded to do an EDA aimed to answer key questions regarding the scope, nature, and contributing factors of workforce reductions during the period of late 2019 to early 2023.<br>
 
 <details>
 	<summary>I. Overall Impact of Layoffs</summary><br>
